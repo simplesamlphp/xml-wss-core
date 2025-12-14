@@ -1,0 +1,47 @@
+{
+    "name": "simplesamlphp/xml-wss-core",
+    "description": "WS-Security PHP library",
+    "license": "LGPL-2.1-or-later",
+    "type": "simplesamlphp-xmlprovider",
+    "authors": [
+        {
+            "name": "Tim van Dijen",
+            "email": "tvdijen@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-dom": "*",
+        "ext-spl": "*",
+
+        "simplesamlphp/assert": "~1.9",
+        "simplesamlphp/xml-common": "~2.4"
+    },
+    "require-dev": {
+        "simplesamlphp/simplesamlphp-test-framework": "~1.10",
+        "simplesamlphp/xml-security": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleSAML\\WebServices\\Security\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SimpleSAML\\Test\\WebServices\\Security\\": "tests/Security/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "v1.0.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "simplesamlphp/composer-xmlprovider-installer": true
+        }
+    }
+}

@@ -1,0 +1,4 @@
+<wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="abc123">
+  <wsu:Created>2001-09-13T08:42:00Z</wsu:Created>
+  <wsu:Expires>2001-10-13T09:00:00Z</wsu:Expires>
+</wsu:Timestamp>
