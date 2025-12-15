@@ -29,6 +29,6 @@ class DateTimeValue extends BaseDateTimeValue
     protected function validateValue(string $value): void
     {
         // Note: value must already be sanitized before validating
-        Assert::validWSUDateTime($this->sanitizeValue($value), ProtocolViolationException::class);
+        Assert::validDateTime($this->sanitizeValue($value), ProtocolViolationException::class);
     }
 }

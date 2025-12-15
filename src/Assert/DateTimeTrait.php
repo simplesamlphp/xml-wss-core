@@ -15,7 +15,7 @@ trait DateTimeTrait
      * @param string $value
      * @param string $message
      */
-    protected static function validWSUDateTime(string $value, string $message = ''): void
+    protected static function validDateTime(string $value, string $message = ''): void
     {
         parent::validDateTime($value);
         parent::endsWith(
