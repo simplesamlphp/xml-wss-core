@@ -62,8 +62,6 @@ abstract class AbstractEncodedString extends AbstractAttributedString
         Assert::same($xml->localName, static::getLocalName(), InvalidDOMElementException::class);
         Assert::same($xml->namespaceURI, static::NS, InvalidDOMElementException::class);
 
-        $nsAttributes = self::getAttributesNSFromXML($xml);
-
         $Id = null;
         if ($xml->hasAttributeNS(C::NS_SEC_UTIL, 'Id')) {
             $Id = IDValue::fromString($xml->getAttributeNS(C::NS_SEC_UTIL, 'Id'));
