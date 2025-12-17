@@ -53,7 +53,6 @@ abstract class AbstractBinarySecurityTokenType extends AbstractEncodedString
      * Create an instance of this object from its XML representation.
      *
      * @param \DOMElement $xml
-     * @return static
      *
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
@@ -82,7 +81,6 @@ abstract class AbstractBinarySecurityTokenType extends AbstractEncodedString
      * Add this username token to an XML element.
      *
      * @param \DOMElement $parent The element we should append this username token to.
-     * @return \DOMElement
      */
     public function toXML(?DOMElement $parent = null): DOMElement
     {

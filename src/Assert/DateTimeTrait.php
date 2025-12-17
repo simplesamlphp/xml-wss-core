@@ -13,8 +13,6 @@ use SimpleSAML\WebServices\Security\Exception\ProtocolViolationException;
 trait DateTimeTrait
 {
     /**
-     * @param string $value
-     * @param string $message
      */
     protected static function validDateTime(string $value, string $message = ''): void
     {

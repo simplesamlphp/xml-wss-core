@@ -22,7 +22,7 @@ abstract class AbstractReferenceType extends AbstractWsseElement
 
 
     /** The namespace-attribute for the xs:anyAttribute element */
-    public const XS_ANY_ATTR_NAMESPACE = NS::OTHER;
+    public const string XS_ANY_ATTR_NAMESPACE = NS::OTHER;
 
 
     /**
@@ -63,7 +63,6 @@ abstract class AbstractReferenceType extends AbstractWsseElement
      * Create an instance of this object from its XML representation.
      *
      * @param \DOMElement $xml
-     * @return static
      *
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
@@ -85,7 +84,6 @@ abstract class AbstractReferenceType extends AbstractWsseElement
      * Add this username token to an XML element.
      *
      * @param \DOMElement|null $parent The element we should append this username token to.
-     * @return \DOMElement
      */
     public function toXML(?DOMElement $parent = null): DOMElement
     {

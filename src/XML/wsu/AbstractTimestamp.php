@@ -26,13 +26,13 @@ abstract class AbstractTimestamp extends AbstractWsuElement
 
 
     /** The namespace-attribute for the xs:anyAttribute element */
-    public const XS_ANY_ATTR_NAMESPACE = NS::OTHER;
+    public const string XS_ANY_ATTR_NAMESPACE = NS::OTHER;
 
     /** The namespace-attribute for the xs:any element */
-    public const XS_ANY_ELT_NAMESPACE = NS::ANY;
+    public const string XS_ANY_ELT_NAMESPACE = NS::ANY;
 
     /** The exclusions for the xs:any element */
-    public const XS_ANY_ELT_EXCLUSIONS = [
+    public const array XS_ANY_ELT_EXCLUSIONS = [
         ['http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 'Created'],
         ['http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 'Expires'],
     ];
@@ -88,8 +88,6 @@ abstract class AbstractTimestamp extends AbstractWsuElement
 
     /**
      * Test if an object, at the state it's in, would produce an empty XML-element
-     *
-     * @return bool
      */
     public function isEmptyElement(): bool
     {
@@ -105,7 +103,6 @@ abstract class AbstractTimestamp extends AbstractWsuElement
      * Create an instance of this object from its XML representation.
      *
      * @param \DOMElement $xml
-     * @return static
      *
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
@@ -138,7 +135,6 @@ abstract class AbstractTimestamp extends AbstractWsuElement
      * Convert this Timestamp to XML.
      *
      * @param \DOMElement|null $parent The element we should append this class to.
-     * @return \DOMElement The XML element after adding the data corresponding to this Timestamp.
      */
     public function toXML(?DOMElement $parent = null): DOMElement
     {

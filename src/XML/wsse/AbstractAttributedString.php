@@ -28,15 +28,14 @@ abstract class AbstractAttributedString extends AbstractWsseElement
 
 
     /** The namespace-attribute for the xs:anyAttribute element */
-    public const XS_ANY_ATTR_NAMESPACE = NS::OTHER;
+    public const string XS_ANY_ATTR_NAMESPACE = NS::OTHER;
 
     /** The exclusions for the xs:anyAttribute element */
-    public const XS_ANY_ATTR_EXCLUSIONS = [
+    public const array XS_ANY_ATTR_EXCLUSIONS = [
         ['http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 'Id'],
     ];
 
-    /** @var string */
-    public const TEXTCONTENT_TYPE = StringValue::class;
+    public const string TEXTCONTENT_TYPE = StringValue::class;
 
 
     /**
@@ -69,7 +68,6 @@ abstract class AbstractAttributedString extends AbstractWsseElement
      * Create an instance of this object from its XML representation.
      *
      * @param \DOMElement $xml
-     * @return static
      *
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
@@ -94,7 +92,6 @@ abstract class AbstractAttributedString extends AbstractWsseElement
 
     /**
      * @param \DOMElement|null $parent
-     * @return \DOMElement
      */
     public function toXML(?DOMElement $parent = null): DOMElement
     {
