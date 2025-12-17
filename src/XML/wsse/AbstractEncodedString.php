@@ -52,7 +52,6 @@ abstract class AbstractEncodedString extends AbstractAttributedString
      * Create an instance of this object from its XML representation.
      *
      * @param \DOMElement $xml
-     * @return static
      *
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
@@ -78,7 +77,6 @@ abstract class AbstractEncodedString extends AbstractAttributedString
 
     /**
      * @param \DOMElement|null $parent
-     * @return \DOMElement
      */
     public function toXML(?DOMElement $parent = null): DOMElement
     {

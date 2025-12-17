@@ -24,11 +24,10 @@ abstract class AbstractAttributedURI extends AbstractWsuElement
     use TypedTextContentTrait;
 
 
-    /** @var string */
-    public const TEXTCONTENT_TYPE = AnyURIValue::class;
+    public const string TEXTCONTENT_TYPE = AnyURIValue::class;
 
     /** The namespace-attribute for the xs:anyAttribute element */
-    public const XS_ANY_ATTR_NAMESPACE = NS::OTHER;
+    public const string XS_ANY_ATTR_NAMESPACE = NS::OTHER;
 
 
     /**
@@ -63,7 +62,6 @@ abstract class AbstractAttributedURI extends AbstractWsuElement
      * Create an instance of this object from its XML representation.
      *
      * @param \DOMElement $xml
-     * @return static
      *
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
@@ -84,7 +82,6 @@ abstract class AbstractAttributedURI extends AbstractWsuElement
 
     /**
      * @param \DOMElement|null $parent
-     * @return \DOMElement
      */
     final public function toXML(?DOMElement $parent = null): DOMElement
     {

@@ -16,12 +16,9 @@ use SimpleSAML\XML\AbstractElement;
  */
 abstract class AbstractWsuElement extends AbstractElement
 {
-    /** @var string */
-    public const NS = C::NS_SEC_UTIL;
+    public const string NS = C::NS_SEC_UTIL;
 
-    /** @var string */
-    public const NS_PREFIX = 'wsu';
+    public const string NS_PREFIX = 'wsu';
 
-    /** @var string */
-    public const SCHEMA = 'resources/schemas/oasis-200401-wss-wssecurity-utility-1.0.xsd';
+    public const string SCHEMA = 'resources/schemas/oasis-200401-wss-wssecurity-utility-1.0.xsd';
 }

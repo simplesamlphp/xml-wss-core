@@ -15,16 +15,13 @@ class DateTimeValue extends BaseDateTimeValue
 {
     /**
      * Lowercase p as opposed to the base-class to covert the timestamp to UTC as required
-     * by the WSSecurity specifications
+     *  by the WSSecurity specifications
      */
-    public const DATETIME_FORMAT = 'Y-m-d\\TH:i:sp';
+    public const string DATETIME_FORMAT = 'Y-m-d\\TH:i:sp';
 
 
     /**
      * Validate the value.
-     *
-     * @param string $value
-     * @return void
      */
     protected function validateValue(string $value): void
     {
