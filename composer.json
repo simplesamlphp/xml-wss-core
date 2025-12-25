@@ -15,11 +15,12 @@
         "ext-spl": "*",
 
         "simplesamlphp/assert": "~1.9",
-        "simplesamlphp/xml-common": "~2.5"
+        "simplesamlphp/xml-common": "~2.5",
+        "simplesamlphp/xml-security": "~2.1",
+        "simplesamlphp/xml-soap": "~2.1"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp-test-framework": "~1.11",
-        "simplesamlphp/xml-security": "~2.1"
+        "simplesamlphp/simplesamlphp-test-framework": "~1.11"
     },
     "autoload": {
         "psr-4": {

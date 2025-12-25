@@ -15,6 +15,12 @@ return [
         'TransformationParameters' => '\SimpleSAML\WebServices\Security\XML\wsse\TransformationParameters',
         'UsernameToken' => '\SimpleSAML\WebServices\Security\XML\wsse\UsernameToken',
     ],
+    'http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd' => [
+        'EncryptedHeader' => '\SimpleSAML\WebServices\Security\XML\wsse11\EncryptedHeader',
+        'Iteration' => '\SimpleSAML\WebServices\Security\XML\wsse11\Iteration',
+        'Salt' => '\SimpleSAML\WebServices\Security\XML\wsse11\Salt',
+        'SignatureConfirmation' => '\SimpleSAML\WebServices\Security\XML\wsse11\SignatureConfirmation',
+    ],
     'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd' => [
         'Created' => '\SimpleSAML\WebServices\Security\XML\wsu\Created',
         'Expires' => '\SimpleSAML\WebServices\Security\XML\wsu\Expires',
