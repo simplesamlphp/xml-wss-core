@@ -19,6 +19,12 @@ class Constants extends \SimpleSAML\XML\Constants
         'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
 
     /**
+     * The namespace for WS-Security extensions 1.1.
+     */
+    public const string NS_SEC_EXT_11 =
+        'http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd';
+
+    /**
      * The namespace for WS-Security utilities protocol.
      */
     public const string NS_SEC_UTIL =
