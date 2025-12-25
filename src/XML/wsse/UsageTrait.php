@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace SimpleSAML\WebServices\Security\XML\wsse;
 
-use SimpleSAML\XMLSchema\Type\AnyURIValue;
+use SimpleSAML\WebServices\Security\Type\UsageValue;
 
 /**
  * @package simplesamlphp/xml-wss-core
  */
 trait UsageTrait
 {
-    /** @var \SimpleSAML\XMLSchema\Type\AnyURIValue|null */
-    protected ?AnyURIValue $usage;
+    /** @var \SimpleSAML\WebServices\Security\Type\UsageValue|null */
+    protected ?UsageValue $usage;
 
 
     /**
-     * @return \SimpleSAML\XMLSchema\Type\AnyURIValue|null
+     * @return \SimpleSAML\WebServices\Security\Type\UsageValue|null
      */
-    public function getUsage(): ?AnyURIValue
+    public function getUsage(): ?UsageValue
     {
         return $this->usage;
     }
 
 
     /**
-     * @param \SimpleSAML\XMLSchema\Type\AnyURIValue $usage|null
+     * @param \SimpleSAML\WebServices\Security\Type\UsageValue|null $usage
      */
-    private function setUsage(?AnyURIValue $usage): void
+    private function setUsage(?UsageValue $usage): void
     {
         $this->usage = $usage;
     }

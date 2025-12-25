@@ -21,6 +21,7 @@ use SimpleSAML\XMLSchema\XML\Constants\NS;
 abstract class AbstractAttributedURI extends AbstractWsuElement
 {
     use ExtendableAttributesTrait;
+    use IDTrait;
     use TypedTextContentTrait;
 
 
@@ -39,22 +40,12 @@ abstract class AbstractAttributedURI extends AbstractWsuElement
      */
     final protected function __construct(
         AnyURIValue $uri,
-        protected ?IDValue $Id = null,
+        ?IDValue $Id = null,
         array $namespacedAttributes = [],
     ) {
-        Assert::nullOrValidNCName($Id);
-
         $this->setContent($uri);
+        $this->setId($Id);
         $this->setAttributesNS($namespacedAttributes);
-    }
-
-
-    /**
-     * @return \SimpleSAML\WebServices\Security\Type\IDValue|null
-     */
-    public function getId(): ?IDValue
-    {
-        return $this->Id;
     }
 
 
@@ -88,12 +79,9 @@ abstract class AbstractAttributedURI extends AbstractWsuElement
         $e = $this->instantiateParentElement($parent);
         $e->textContent = $this->getContent()->getValue();
 
-        $attributes = $this->getAttributesNS();
-        if ($this->getId() !== null) {
-            $this->getId()->toAttribute()->toXML($e);
-        }
+        $this->getId()?->toAttribute()->toXML($e);
 
-        foreach ($attributes as $attr) {
+        foreach ($this->getAttributesNS() as $attr) {
             $attr->toXML($e);
         }
 

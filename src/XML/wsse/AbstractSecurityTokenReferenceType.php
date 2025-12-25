@@ -8,14 +8,12 @@ use DOMElement;
 use SimpleSAML\WebServices\Security\Assert\Assert;
 use SimpleSAML\WebServices\Security\Constants as C;
 use SimpleSAML\WebServices\Security\Type\IDValue;
-use SimpleSAML\XML\Attribute as XMLAttribute;
+use SimpleSAML\WebServices\Security\Type\UsageValue;
+use SimpleSAML\WebServices\Security\XML\wsu\IDTrait;
 use SimpleSAML\XML\ExtendableAttributesTrait;
 use SimpleSAML\XML\ExtendableElementTrait;
 use SimpleSAML\XMLSchema\Exception\InvalidDOMElementException;
-use SimpleSAML\XMLSchema\Type\AnyURIValue;
 use SimpleSAML\XMLSchema\XML\Constants\NS;
-
-use function array_unshift;
 
 /**
  * Class defining the SecurityTokenReferenceType element
@@ -26,6 +24,7 @@ abstract class AbstractSecurityTokenReferenceType extends AbstractWsseElement
 {
     use ExtendableAttributesTrait;
     use ExtendableElementTrait;
+    use IDTrait;
     use UsageTrait;
 
 
@@ -46,28 +45,20 @@ abstract class AbstractSecurityTokenReferenceType extends AbstractWsseElement
      * AbstractSecurityReferenceType constructor
      *
      * @param \SimpleSAML\WebServices\Security\Type\IDValue|null $Id
-     * @param \SimpleSAML\XMLSchema\Type\AnyURIValue|null $Usage
+     * @param \SimpleSAML\WebServices\Security\Type\UsageValue|null $Usage
      * @param array<\SimpleSAML\XML\SerializableElementInterface> $children
      * @param array<\SimpleSAML\XML\Attribute> $namespacedAttributes
      */
     final public function __construct(
-        protected ?IDValue $Id = null,
-        ?AnyURIValue $Usage = null,
+        ?IDValue $Id = null,
+        ?UsageValue $Usage = null,
         array $children = [],
         array $namespacedAttributes = [],
     ) {
+        $this->setId($Id);
         $this->setUsage($Usage);
         $this->setElements($children);
         $this->setAttributesNS($namespacedAttributes);
-    }
-
-
-    /**
-     * @return \SimpleSAML\WebServices\Security\Type\IDValue|null
-     */
-    public function getId(): ?IDValue
-    {
-        return $this->Id;
     }
 
 
@@ -102,7 +93,7 @@ abstract class AbstractSecurityTokenReferenceType extends AbstractWsseElement
 
         $Usage = null;
         if ($xml->hasAttributeNS(C::NS_SEC_EXT, 'Usage')) {
-            $Usage = AnyURIValue::fromString($xml->getAttributeNS(C::NS_SEC_EXT, 'Usage'));
+            $Usage = UsageValue::fromString($xml->getAttributeNS(C::NS_SEC_EXT, 'Usage'));
         }
 
         return new static(
@@ -123,18 +114,10 @@ abstract class AbstractSecurityTokenReferenceType extends AbstractWsseElement
     {
         $e = parent::instantiateParentElement($parent);
 
-        $attributes = $this->getAttributesNS();
-        if ($this->getId() !== null) {
-            $idAttr = new XMLAttribute(C::NS_SEC_UTIL, 'wsu', 'Id', $this->getId());
-            array_unshift($attributes, $idAttr);
-        }
+        $this->getId()?->toAttribute()->toXML($e);
+        $this->getUsage()?->toAttribute()->toXML($e);
 
-        if ($this->getUsage() !== null) {
-            $UsageAttr = new XMLAttribute(C::NS_SEC_EXT, 'wsse', 'Usage', $this->getUsage());
-            array_unshift($attributes, $UsageAttr);
-        }
-
-        foreach ($attributes as $attr) {
+        foreach ($this->getAttributesNS() as $attr) {
             $attr->toXML($e);
         }
 

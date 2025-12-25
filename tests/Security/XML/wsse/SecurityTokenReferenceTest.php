@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use SimpleSAML\WebServices\Security\Type\IDValue;
+use SimpleSAML\WebServices\Security\Type\UsageValue;
 use SimpleSAML\WebServices\Security\XML\wsse\AbstractSecurityTokenReferenceType;
 use SimpleSAML\WebServices\Security\XML\wsse\AbstractWsseElement;
 use SimpleSAML\WebServices\Security\XML\wsse\SecurityTokenReference;
@@ -16,7 +17,6 @@ use SimpleSAML\XML\Chunk;
 use SimpleSAML\XML\DOMDocumentFactory;
 use SimpleSAML\XML\TestUtils\SchemaValidationTestTrait;
 use SimpleSAML\XML\TestUtils\SerializableElementTestTrait;
-use SimpleSAML\XMLSchema\Type\AnyURIValue;
 use SimpleSAML\XMLSchema\Type\StringValue;
 
 use function dirname;
@@ -64,7 +64,7 @@ final class SecurityTokenReferenceTest extends TestCase
 
         $securityTokenReference = new SecurityTokenReference(
             IDValue::fromString('SomeID'),
-            AnyURIValue::fromString('SomeUsage'),
+            UsageValue::fromString('SomeUsage'),
             [new Chunk($child->documentElement)],
             [$attr1],
         );

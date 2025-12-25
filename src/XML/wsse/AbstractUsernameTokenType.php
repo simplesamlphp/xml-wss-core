@@ -8,6 +8,7 @@ use DOMElement;
 use SimpleSAML\WebServices\Security\Assert\Assert;
 use SimpleSAML\WebServices\Security\Constants as C;
 use SimpleSAML\WebServices\Security\Type\IDValue;
+use SimpleSAML\WebServices\Security\XML\wsu\IDTrait;
 use SimpleSAML\XML\ExtendableAttributesTrait;
 use SimpleSAML\XML\ExtendableElementTrait;
 use SimpleSAML\XMLSchema\Exception\InvalidDOMElementException;
@@ -26,6 +27,7 @@ abstract class AbstractUsernameTokenType extends AbstractWsseElement
 {
     use ExtendableAttributesTrait;
     use ExtendableElementTrait;
+    use IDTrait;
 
 
     /** The namespace-attribute for the xs:anyAttribute element */
@@ -55,21 +57,13 @@ abstract class AbstractUsernameTokenType extends AbstractWsseElement
      */
     final public function __construct(
         protected Username $username,
-        protected ?IDValue $Id = null,
+        ?IDValue $Id = null,
         array $children = [],
         array $namespacedAttributes = [],
     ) {
+        $this->setId($Id);
         $this->setElements($children);
         $this->setAttributesNS($namespacedAttributes);
-    }
-
-
-    /**
-     * @return \SimpleSAML\WebServices\Security\Type\IDValue|null
-     */
-    public function getId(): ?IDValue
-    {
-        return $this->Id;
     }
 
 

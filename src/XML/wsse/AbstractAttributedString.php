@@ -8,6 +8,7 @@ use DOMElement;
 use SimpleSAML\WebServices\Security\Assert\Assert;
 use SimpleSAML\WebServices\Security\Constants as C;
 use SimpleSAML\WebServices\Security\Type\IDValue;
+use SimpleSAML\WebServices\Security\XML\wsu\IDTrait;
 use SimpleSAML\XML\ExtendableAttributesTrait;
 use SimpleSAML\XML\TypedTextContentTrait;
 use SimpleSAML\XMLSchema\Exception\InvalidDOMElementException;
@@ -24,6 +25,7 @@ use SimpleSAML\XMLSchema\XML\Constants\NS;
 abstract class AbstractAttributedString extends AbstractWsseElement
 {
     use ExtendableAttributesTrait;
+    use IDTrait;
     use TypedTextContentTrait;
 
 
@@ -47,20 +49,12 @@ abstract class AbstractAttributedString extends AbstractWsseElement
      */
     public function __construct(
         StringValue $content,
-        protected ?IDValue $Id = null,
+        ?IDValue $Id = null,
         array $namespacedAttributes = [],
     ) {
+        $this->setId($Id);
         $this->setContent($content);
         $this->setAttributesNS($namespacedAttributes);
-    }
-
-
-    /**
-     * @return \SimpleSAML\WebServices\Security\Type\IDValue|null
-     */
-    public function getId(): ?IDValue
-    {
-        return $this->Id;
     }
 
 

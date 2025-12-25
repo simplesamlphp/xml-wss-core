@@ -6,6 +6,7 @@ namespace SimpleSAML\WebServices\Security\XML\wsse11;
 
 use DOMElement;
 use SimpleSAML\WebServices\Security\Type\IDValue;
+use SimpleSAML\WebServices\Security\XML\wsu\IDTrait;
 use SimpleSAML\XMLSchema\Type\Base64BinaryValue;
 
 /**
@@ -15,6 +16,9 @@ use SimpleSAML\XMLSchema\Type\Base64BinaryValue;
  */
 abstract class AbstractSignatureConfirmation extends AbstractWsse11Element
 {
+    use IDTrait;
+
+
     /**
      * AbstractSignatureConfirmation constructor
      *
@@ -23,8 +27,9 @@ abstract class AbstractSignatureConfirmation extends AbstractWsse11Element
      */
     final public function __construct(
         protected Base64BinaryValue $value,
-        protected ?IDValue $Id = null,
+        ?IDValue $Id = null,
     ) {
+        $this->setId($Id);
     }
 
 
@@ -38,24 +43,13 @@ abstract class AbstractSignatureConfirmation extends AbstractWsse11Element
 
 
     /**
-     * @return \SimpleSAML\WebServices\Security\Type\IDValue|null
-     */
-    public function getID(): ?IDValue
-    {
-        return $this->Id;
-    }
-
-
-    /**
      */
     public function toXML(?DOMElement $parent = null): DOMElement
     {
         $e = $this->instantiateParentElement($parent);
         $e->setAttribute('Value', $this->getValue()->getValue());
 
-        if ($this->getId() !== null) {
-            $this->getId()->toAttribute()->toXML($e);
-        }
+        $this->getId()?->toAttribute()->toXML($e);
 
         return $e;
     }

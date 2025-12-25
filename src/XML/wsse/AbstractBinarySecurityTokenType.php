@@ -8,6 +8,7 @@ use DOMElement;
 use SimpleSAML\WebServices\Security\Assert\Assert;
 use SimpleSAML\WebServices\Security\Constants as C;
 use SimpleSAML\WebServices\Security\Type\IDValue;
+use SimpleSAML\WebServices\Security\XML\wsu\IDTrait;
 use SimpleSAML\XMLSchema\Exception\InvalidDOMElementException;
 use SimpleSAML\XMLSchema\Type\AnyURIValue;
 use SimpleSAML\XMLSchema\Type\StringValue;
@@ -19,6 +20,9 @@ use SimpleSAML\XMLSchema\Type\StringValue;
  */
 abstract class AbstractBinarySecurityTokenType extends AbstractEncodedString
 {
+    use IDTrait;
+
+
     /**
      * AbstractBinarySecurityTokenType constructor
      *

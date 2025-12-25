@@ -23,6 +23,7 @@ abstract class AbstractTimestamp extends AbstractWsuElement
 {
     use ExtendableAttributesTrait;
     use ExtendableElementTrait;
+    use IDTrait;
 
 
     /** The namespace-attribute for the xs:anyAttribute element */
@@ -50,21 +51,13 @@ abstract class AbstractTimestamp extends AbstractWsuElement
     final public function __construct(
         protected ?Created $created = null,
         protected ?Expires $expires = null,
-        protected ?IDValue $Id = null,
+        ?IDValue $Id = null,
         array $elements = [],
         array $namespacedAttributes = [],
     ) {
+        $this->setId($Id);
         $this->setElements($elements);
         $this->setAttributesNS($namespacedAttributes);
-    }
-
-
-    /**
-     * @return \SimpleSAML\WebServices\Security\Type\IDValue|null
-     */
-    public function getId(): ?IDValue
-    {
-        return $this->Id;
     }
 
 
@@ -140,12 +133,9 @@ abstract class AbstractTimestamp extends AbstractWsuElement
     {
         $e = $this->instantiateParentElement($parent);
 
-        $attributes = $this->getAttributesNS();
-        if ($this->getId() !== null) {
-            $this->getId()->toAttribute()->toXML($e);
-        }
+        $this->getId()?->toAttribute()->toXML($e);
 
-        foreach ($attributes as $attr) {
+        foreach ($this->getAttributesNS() as $attr) {
             $attr->toXML($e);
         }
 

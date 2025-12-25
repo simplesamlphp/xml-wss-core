@@ -20,6 +20,7 @@ use SimpleSAML\XMLSchema\XML\Constants\NS;
 abstract class AbstractAttributedDateTime extends AbstractWsuElement
 {
     use ExtendableAttributesTrait;
+    use IDTrait;
 
 
     /** The namespace-attribute for the xs:anyAttribute element */
@@ -35,19 +36,11 @@ abstract class AbstractAttributedDateTime extends AbstractWsuElement
      */
     final public function __construct(
         protected DateTimeValue $dateTime,
-        protected ?IDValue $Id = null,
+        ?IDValue $Id = null,
         array $namespacedAttributes = [],
     ) {
+        $this->setId($Id);
         $this->setAttributesNS($namespacedAttributes);
-    }
-
-
-    /**
-     * @return \SimpleSAML\WebServices\Security\Type\IDValue|null
-     */
-    public function getId(): ?IDValue
-    {
-        return $this->Id;
     }
 
 
@@ -80,7 +73,11 @@ abstract class AbstractAttributedDateTime extends AbstractWsuElement
             $Id = IDValue::fromString($xml->getAttributeNS(static::NS, 'Id'));
         }
 
-        return new static(DateTimeValue::fromString($xml->textContent), $Id, self::getAttributesNSFromXML($xml));
+        return new static(
+            DateTimeValue::fromString($xml->textContent),
+            $Id,
+            self::getAttributesNSFromXML($xml),
+        );
     }
 
 
@@ -92,12 +89,9 @@ abstract class AbstractAttributedDateTime extends AbstractWsuElement
         $e = $this->instantiateParentElement($parent);
         $e->textContent = $this->getDateTime()->getValue();
 
-        $attributes = $this->getAttributesNS();
-        if ($this->getId() !== null) {
-            $this->getId()->toAttribute()->toXML($e);
-        }
+        $this->getId()?->toAttribute()->toXML($e);
 
-        foreach ($attributes as $attr) {
+        foreach ($this->getAttributesNS() as $attr) {
             $attr->toXML($e);
         }
 

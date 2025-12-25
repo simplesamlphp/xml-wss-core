@@ -105,8 +105,7 @@ final class EncryptedHeaderTest extends TestCase
         $encryptedHeader = new EncryptedHeader(
             $encryptedData,
             IDValue::fromString('phpunit'),
-            $mustUnderstand,
-            $actor,
+            [$mustUnderstand->toAttribute(), $actor->toAttribute()],
         );
 
         $this->assertEquals(
