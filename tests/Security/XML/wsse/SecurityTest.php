@@ -22,7 +22,6 @@ use SimpleSAML\XMLSchema\Type\AnyURIValue;
 use SimpleSAML\XMLSchema\Type\Base64BinaryValue;
 use SimpleSAML\XMLSchema\Type\StringValue;
 use SimpleSAML\XMLSecurity\Constants as C;
-use SimpleSAML\XMLSecurity\Type\DigestValue as DigestValueType;
 use SimpleSAML\XMLSecurity\XML\ds\CanonicalizationMethod;
 use SimpleSAML\XMLSecurity\XML\ds\DigestMethod;
 use SimpleSAML\XMLSecurity\XML\ds\DigestValue;
@@ -96,16 +95,12 @@ final class SecurityTest extends TestCase
 
         $signature = new Signature(
             new SignedInfo(
-                new CanonicalizationMethod(
-                    AnyURIValue::fromString(C::C14N_EXCLUSIVE_WITHOUT_COMMENTS),
-                ),
-                new SignatureMethod(
-                    AnyURIValue::fromString(C::SIG_RSA_SHA256),
-                ),
+                new CanonicalizationMethod(AnyURIValue::fromString(C::C14N_EXCLUSIVE_WITHOUT_COMMENTS)),
+                new SignatureMethod(AnyURIValue::fromString(C::SIG_RSA_SHA256)),
                 [
                     new DSReference(
                         new DigestMethod(AnyURIValue::fromString(C::DIGEST_SHA256)),
-                        new DigestValue(DigestValueType::fromString($content)),
+                        DigestValue::fromString($content),
                         null,
                         null,
                         null,

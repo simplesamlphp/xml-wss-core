@@ -16,7 +16,6 @@ use SimpleSAML\XML\DOMDocumentFactory;
 use SimpleSAML\XML\TestUtils\SchemaValidationTestTrait;
 use SimpleSAML\XML\TestUtils\SerializableElementTestTrait;
 use SimpleSAML\XMLSchema\Type\AnyURIValue;
-use SimpleSAML\XMLSchema\Type\Base64BinaryValue;
 use SimpleSAML\XMLSchema\Type\IDValue as BaseIDValue;
 use SimpleSAML\XMLSchema\Type\StringValue;
 use SimpleSAML\XMLSecurity\Constants as C;
@@ -69,24 +68,18 @@ final class EncryptedHeaderTest extends TestCase
 
         $encryptedData = new EncryptedData(
             new CipherData(
-                new CipherValue(
-                    Base64BinaryValue::fromString('/CTj03d1DB5e2t7CTo9BEzCf5S9NRzwnBgZRlm32REI='),
-                ),
+                CipherValue::fromString('/CTj03d1DB5e2t7CTo9BEzCf5S9NRzwnBgZRlm32REI='),
             ),
             BaseIDValue::fromString('MyID'),
             AnyURIValue::fromString(C::XMLENC_ELEMENT),
             StringValue::fromString('text/plain'),
             AnyURIValue::fromString('urn:x-simplesamlphp:encoding'),
-            new EncryptionMethod(
-                AnyURIValue::fromString(C::BLOCK_ENC_AES128),
-            ),
+            new EncryptionMethod(AnyURIValue::fromString(C::BLOCK_ENC_AES128)),
             new KeyInfo(
                 [
                     new EncryptedKey(
                         new CipherData(
-                            new CipherValue(
-                                Base64BinaryValue::fromString('/CTj03d1DB5e2t7CTo9BEzCf5S9NRzwnBgZRlm32REI='),
-                            ),
+                            CipherValue::fromString('/CTj03d1DB5e2t7CTo9BEzCf5S9NRzwnBgZRlm32REI='),
                         ),
                         null,
                         null,
@@ -94,9 +87,7 @@ final class EncryptedHeaderTest extends TestCase
                         null,
                         null,
                         null,
-                        new EncryptionMethod(
-                            AnyURIValue::fromString(C::SIG_RSA_SHA256),
-                        ),
+                        new EncryptionMethod(AnyURIValue::fromString(C::SIG_RSA_SHA256)),
                     ),
                 ],
             ),

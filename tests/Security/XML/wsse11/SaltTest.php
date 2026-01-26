@@ -12,7 +12,6 @@ use SimpleSAML\WebServices\Security\XML\wsse11\Salt;
 use SimpleSAML\XML\DOMDocumentFactory;
 use SimpleSAML\XML\TestUtils\SchemaValidationTestTrait;
 use SimpleSAML\XML\TestUtils\SerializableElementTestTrait;
-use SimpleSAML\XMLSchema\Type\Base64BinaryValue;
 
 use function dirname;
 use function strval;
@@ -53,9 +52,7 @@ final class SaltTest extends TestCase
     {
         $content = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 
-        $salt = new Salt(
-            Base64BinaryValue::fromString($content),
-        );
+        $salt = Salt::fromString($content);
 
         $this->assertEquals(
             self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),

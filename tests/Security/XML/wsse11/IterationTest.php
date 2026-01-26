@@ -12,7 +12,6 @@ use SimpleSAML\WebServices\Security\XML\wsse11\Iteration;
 use SimpleSAML\XML\DOMDocumentFactory;
 use SimpleSAML\XML\TestUtils\SchemaValidationTestTrait;
 use SimpleSAML\XML\TestUtils\SerializableElementTestTrait;
-use SimpleSAML\XMLSchema\Type\UnsignedIntValue;
 
 use function dirname;
 use function strval;
@@ -51,9 +50,7 @@ final class IterationTest extends TestCase
      */
     public function testMarshalling(): void
     {
-        $iteration = new Iteration(
-            UnsignedIntValue::fromInteger(5),
-        );
+        $iteration = Iteration::fromString('5');
 
         $this->assertEquals(
             self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
