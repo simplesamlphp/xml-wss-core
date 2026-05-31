@@ -75,9 +75,10 @@ final class BinarySecurityTokenTest extends TestCase
             ),
         );
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($binarySecurityToken),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($binarySecurityToken);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

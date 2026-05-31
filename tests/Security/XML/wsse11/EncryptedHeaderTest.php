@@ -99,9 +99,10 @@ final class EncryptedHeaderTest extends TestCase
             [$mustUnderstand->toAttribute(), $actor->toAttribute()],
         );
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($encryptedHeader),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($encryptedHeader);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

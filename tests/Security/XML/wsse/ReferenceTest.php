@@ -65,9 +65,10 @@ final class ReferenceTest extends TestCase
             [$attr1],
         );
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($reference),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($reference);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

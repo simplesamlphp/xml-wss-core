@@ -61,10 +61,11 @@ final class TimestampTest extends TestCase
         $timestamp = new Timestamp($created, $expires, IDValue::fromString('abc123'), [], []);
 
         $this->assertFalse($timestamp->isEmptyElement());
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($timestamp),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($timestamp);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 
 
