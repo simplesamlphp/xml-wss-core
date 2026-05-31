@@ -133,7 +133,18 @@ abstract class AbstractTimestamp extends AbstractWsuElement
     {
         $e = $this->instantiateParentElement($parent);
 
-        $this->getId()?->toAttribute()->toXML($e);
+        if ($this->getId() !== null) {
+            if ($parent !== null && !$parent->lookupPrefix($this->getId()->getNamespacePrefix()->getValue())) {
+                $namespace = new XMLAttribute(
+                    C::NS_XMLNS,
+                    'xmlns',
+                    $this->getId()->getNamespacePrefix()->getValue(),
+                    $this->getId()->getNamespaceURI(),
+                );
+             }
+
+             $this->getId()?->toAttribute()->toXML($e);
+        }
 
         foreach ($this->getAttributesNS() as $attr) {
             $attr->toXML($e);

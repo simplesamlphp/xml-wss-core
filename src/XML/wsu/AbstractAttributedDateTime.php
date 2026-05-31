@@ -89,7 +89,19 @@ abstract class AbstractAttributedDateTime extends AbstractWsuElement
         $e = $this->instantiateParentElement($parent);
         $e->textContent = $this->getDateTime()->getValue();
 
-        $this->getId()?->toAttribute()->toXML($e);
+        if ($this->getId() !== null) {
+            if ($parent !== null && !$parent->lookupPrefix($this->getId()->getNamespacePrefix()->getValue())) {
+                $namespace = new XMLAttribute(
+                    C::NS_XMLNS,
+                    'xmlns',
+                    $this->getId()->getNamespacePrefix()->getValue(),
+                    $this->getId()->getNamespaceURI(),
+                );
+                $namespace->toXML($parent);
+            }
+
+            $this->getId()->toAttribute()->toXML($e);
+        }
 
         foreach ($this->getAttributesNS() as $attr) {
             $attr->toXML($e);
