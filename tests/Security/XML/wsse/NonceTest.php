@@ -70,9 +70,10 @@ final class NonceTest extends TestCase
             ),
         );
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($nonce),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($nonce);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

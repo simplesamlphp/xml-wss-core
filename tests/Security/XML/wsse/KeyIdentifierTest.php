@@ -75,9 +75,10 @@ final class KeyIdentifierTest extends TestCase
             ),
         );
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($keyIdentifier),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($keyIdentifier);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

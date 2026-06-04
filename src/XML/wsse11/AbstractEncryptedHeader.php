@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimpleSAML\WebServices\Security\XML\wsse11;
 
-use DOMElement;
+use Dom;
 use SimpleSAML\WebServices\Security\Assert\Assert;
 use SimpleSAML\WebServices\Security\Type\IDValue;
 use SimpleSAML\WebServices\Security\XML\wsu\IDTrait;
@@ -75,9 +75,9 @@ abstract class AbstractEncryptedHeader extends AbstractWsse11Element
 
 
     /**
-     * @param \DOMElement|null $parent
+     * @param \Dom\Element|null $parent
      */
-    final public function toXML(?DOMElement $parent = null): DOMElement
+    final public function toXML(?Dom\Element $parent = null): Dom\Element
     {
         $e = $this->instantiateParentElement($parent);
 

@@ -59,9 +59,10 @@ final class SignatureConfirmationTest extends TestCase
             IDValue::fromString('phpunit'),
         );
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($signatureConfirmation),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($signatureConfirmation);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

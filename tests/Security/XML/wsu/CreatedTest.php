@@ -55,9 +55,10 @@ final class CreatedTest extends TestCase
     {
         $created = new Created(DateTimeValue::fromString('2001-09-13T08:42:00Z'));
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($created),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($created);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

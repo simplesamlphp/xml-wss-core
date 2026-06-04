@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "simplesamlphp/simplesamlphp-test-framework": "~1.11",
-        "simplesamlphp/xml-soap": "~2.3"
+        "simplesamlphp/xml-soap": "dev-feature/dom-migration-php84"
     },
     "autoload": {
         "psr-4": {
