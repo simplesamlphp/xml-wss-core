@@ -91,10 +91,10 @@ abstract class AbstractEncryptedHeader extends AbstractWsse11Element
                     /** @var \SimpleSAML\XMLSchema\Type\BooleanValue $value */
                     $value = $attr->getAttrValue();
                     if ($attr->getAttrName() === 'mustUnderstand' && $value->getValue() === '0') {
-                        continue; // We may not send this
+                        continue 2; // We may not send this
                     }
                     $attr->toXML($e);
-                    continue;
+                    continue 2;
                 case 'http://www.w3.org/2003/05/soap-envelope':
                     /** @var \SimpleSAML\XMLSchema\Type\BooleanValue $value */
                     $value = $attr->getAttrValue();
@@ -102,12 +102,12 @@ abstract class AbstractEncryptedHeader extends AbstractWsse11Element
                         ($attr->getAttrName() === 'mustUnderstand' || $attr->getAttrName() === 'relay')
                         && $value->getValue() === '0'
                     ) {
-                        continue; // We may not send this
+                        continue 2; // We may not send this
                     }
                     $attr->toXML($e);
-                    continue;
+                    continue 2;
                 default:
-                    continue;
+                    continue 2;
             }
         }
 
