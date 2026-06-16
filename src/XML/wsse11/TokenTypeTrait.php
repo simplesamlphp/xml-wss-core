@@ -27,7 +27,7 @@ trait TokenTypeTrait
 
 
     /**
-     * @param \SimpleSAML\XMLSchema\Type\AnyURIValue $usage|null
+     * @param \SimpleSAML\XMLSchema\Type\AnyURIValue $tokenType|null
      */
     private function setTokenType(?AnyURIValue $tokenType): void
     {
