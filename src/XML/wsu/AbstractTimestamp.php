@@ -12,7 +12,7 @@ use SimpleSAML\XML\ExtendableElementTrait;
 use SimpleSAML\XMLSchema\Exception\InvalidDOMElementException;
 use SimpleSAML\XMLSchema\XML\Constants\NS;
 
-use function array_pop;
+use function array_last;
 
 /**
  * Abstract class defining the Timestamp type
@@ -115,8 +115,8 @@ abstract class AbstractTimestamp extends AbstractWsuElement
         }
 
         return new static(
-            array_pop($created),
-            array_pop($expires),
+            array_last($created),
+            array_last($expires),
             $Id,
             $children,
             self::getAttributesNSFromXML($xml),

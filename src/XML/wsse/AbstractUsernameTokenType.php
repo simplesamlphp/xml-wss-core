@@ -16,7 +16,7 @@ use SimpleSAML\XMLSchema\Exception\MissingElementException;
 use SimpleSAML\XMLSchema\Exception\TooManyElementsException;
 use SimpleSAML\XMLSchema\XML\Constants\NS;
 
-use function array_pop;
+use function array_last;
 
 /**
  * Class defining the UsernameTokenType element
@@ -99,7 +99,7 @@ abstract class AbstractUsernameTokenType extends AbstractWsseElement
         }
 
         return new static(
-            array_pop($username),
+            array_last($username),
             $Id,
             self::getChildElementsFromXML($xml),
             self::getAttributesNSFromXML($xml),
