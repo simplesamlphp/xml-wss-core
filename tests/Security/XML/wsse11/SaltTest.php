@@ -54,9 +54,10 @@ final class SaltTest extends TestCase
 
         $salt = Salt::fromString($content);
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($salt),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($salt);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

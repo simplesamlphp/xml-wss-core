@@ -55,9 +55,10 @@ final class ExpiresTest extends TestCase
     {
         $expires = new Expires(DateTimeValue::fromString('2001-10-13T09:00:00Z'));
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($expires),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($expires);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }
