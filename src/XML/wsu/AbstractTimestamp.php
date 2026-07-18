@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimpleSAML\WebServices\Security\XML\wsu;
 
-use DOMElement;
+use Dom;
 use SimpleSAML\WebServices\Security\Assert\Assert;
 use SimpleSAML\WebServices\Security\Type\IDValue;
 use SimpleSAML\XML\ExtendableAttributesTrait;
@@ -12,7 +12,7 @@ use SimpleSAML\XML\ExtendableElementTrait;
 use SimpleSAML\XMLSchema\Exception\InvalidDOMElementException;
 use SimpleSAML\XMLSchema\XML\Constants\NS;
 
-use function array_pop;
+use function array_last;
 
 /**
  * Abstract class defining the Timestamp type
@@ -95,12 +95,12 @@ abstract class AbstractTimestamp extends AbstractWsuElement
     /**
      * Create an instance of this object from its XML representation.
      *
-     * @param \DOMElement $xml
+     * @param \Dom\Element $xml
      *
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
      */
-    public static function fromXML(DOMElement $xml): static
+    public static function fromXML(Dom\Element $xml): static
     {
         Assert::same($xml->localName, static::getLocalName(), InvalidDOMElementException::class);
         Assert::same($xml->namespaceURI, static::NS, InvalidDOMElementException::class);
@@ -115,8 +115,8 @@ abstract class AbstractTimestamp extends AbstractWsuElement
         }
 
         return new static(
-            array_pop($created),
-            array_pop($expires),
+            array_last($created),
+            array_last($expires),
             $Id,
             $children,
             self::getAttributesNSFromXML($xml),
@@ -127,13 +127,15 @@ abstract class AbstractTimestamp extends AbstractWsuElement
     /**
      * Convert this Timestamp to XML.
      *
-     * @param \DOMElement|null $parent The element we should append this class to.
+     * @param \Dom\Element|null $parent The element we should append this class to.
      */
-    public function toXML(?DOMElement $parent = null): DOMElement
+    public function toXML(?Dom\Element $parent = null): Dom\Element
     {
         $e = $this->instantiateParentElement($parent);
 
-        $this->getId()?->toAttribute()->toXML($e);
+        if ($this->getId() !== null) {
+            $this->getId()->toAttribute()->toXML($e);
+        }
 
         foreach ($this->getAttributesNS() as $attr) {
             $attr->toXML($e);

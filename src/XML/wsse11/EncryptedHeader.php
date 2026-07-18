@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimpleSAML\WebServices\Security\XML\wsse11;
 
-use DOMElement;
+use Dom;
 use SimpleSAML\WebServices\Security\Assert\Assert;
 use SimpleSAML\WebServices\Security\Constants as C;
 use SimpleSAML\WebServices\Security\Type\IDValue;
@@ -31,7 +31,7 @@ final class EncryptedHeader extends AbstractEncryptedHeader implements SchemaVal
      * @throws \SimpleSAML\XMLSchema\Exception\InvalidDOMElementException
      *   if the qualified name of the supplied element is wrong
      */
-    public static function fromXML(DOMElement $xml): static
+    public static function fromXML(Dom\Element $xml): static
     {
         Assert::same($xml->localName, static::getLocalName(), InvalidDOMElementException::class);
         Assert::same($xml->namespaceURI, static::NS, InvalidDOMElementException::class);

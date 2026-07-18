@@ -64,9 +64,10 @@ final class PasswordTest extends TestCase
             AnyURIValue::fromString('SomeType'),
         );
 
-        $this->assertEquals(
-            self::$xmlRepresentation->saveXML(self::$xmlRepresentation->documentElement),
-            strval($password),
-        );
+        $expectedXml = self::$xmlRepresentation->saveXml(self::$xmlRepresentation->documentElement);
+        $this->assertNotFalse($expectedXml);
+        $actualXml = strval($password);
+
+        $this->assertXmlStringEqualsXmlString($expectedXml, $actualXml);
     }
 }

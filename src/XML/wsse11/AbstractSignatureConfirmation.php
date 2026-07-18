@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimpleSAML\WebServices\Security\XML\wsse11;
 
-use DOMElement;
+use Dom;
 use SimpleSAML\WebServices\Security\Type\IDValue;
 use SimpleSAML\WebServices\Security\XML\wsu\IDTrait;
 use SimpleSAML\XMLSchema\Type\Base64BinaryValue;
@@ -44,7 +44,7 @@ abstract class AbstractSignatureConfirmation extends AbstractWsse11Element
 
     /**
      */
-    public function toXML(?DOMElement $parent = null): DOMElement
+    public function toXML(?Dom\Element $parent = null): Dom\Element
     {
         $e = $this->instantiateParentElement($parent);
         $e->setAttribute('Value', $this->getValue()->getValue());
